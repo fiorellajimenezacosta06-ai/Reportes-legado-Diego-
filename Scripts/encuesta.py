@@ -131,13 +131,13 @@ def procesar_flujo_embajadores(archivo):
     meses_sin_productos = pd.to_datetime(["2026-01-01","2026-02-01"])
     mask_skip = resumen_final["Fecha"].isin(meses_sin_productos)
     
-    cond_productos = (resumen_final["n_productos"] >= 2) | mask_skip
+    cond_productos = (resumen_final["n_productos"] >= 5) | mask_skip
     
     resumen_final["Procede"] = (
         (resumen_final['Nuestra máquina está en primera posición?'] == 1) &
         (resumen_final['llenado_final'].isin([1,2])) &
         (resumen_final['Máquina contaminada?'] == 0) &
-        (resumen_final["n_materiales"] >= 2) &
+        (resumen_final["n_materiales"] >= 3) &
         cond_productos
     ).astype(int)
 
